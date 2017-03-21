@@ -13,13 +13,13 @@ As seen on the [Mozilla GSOC wiki](https://wiki.mozilla.org/Community:SummerOfCo
 
 For more background, the [Mozilla Science Lab](https://science.mozilla.org/) is a part of the Mozilla Foundation devoted to supporting a global community of scientists who want to open source their research and their learning materials. The Study Group program is a part of that initiative, and centers around a simple website that leverages Jekyll blog software and Github issues to enable the creation of a website for peer-learning groups. These groups collaborate and come together for in-person workshops and events that teach scientific programming concepts, open science practice, and scripting languages. Study Group Leads fork the [Study Group Website Repository](https://github.com/mozillascience/studyGroup) and customize the attached website (gh-page) to run meetups [all over the world](https://science.mozilla.org/programs/studygroups). They organize regular events, skill shares, co-work and create community around open science. 
 
-Currently, we have several repositories for Study Group Assets, which we welcome you to review. Assess the usability and user experience of each, and let us know what you think in the [issues here](https://github.com/mozillascience/studyGroup-GSOC/issues).
+Currently, we have several repositories for Study Group Resources, which we welcome you to review, see the table below. Assess the usability and user experience of each, and let us know what you think in the [issues here](https://github.com/mozillascience/studyGroup-GSOC/issues).
 
 Resource | Description | Additional Links | Owner
 -------- | ----------- | ---------------- | -----
-[Study Group Website](http://mozillascience.github.io/studyGroup/) | Main repository for Study Groups, Leads fork this repository to start their own study group and customize their website | [Code](https://github.com/mozillascience/studyGroup) | [Aurelia](https://github.com/auremoser)
-[Study Group Orientation Guide](https://mozillascience.github.io/study-group-orientation/index.html) | Gitbook that explains how to start a study group and start planning events/workshops | [Code](https://github.com/mozillascience/study-group-orientation) | [Zannah](https://github.com/zee-moz) 
-[Study Group Lessons](https://github.com/mozillascience/studyGroupLessons) | Submoduled lesson outlines for a variety of programming and open science topics | Check out the [issues](https://github.com/mozillascience/studyGroupLessons/issues) for additional lesson suggestions or implementations of the "standard" repo lessons | [Aurelia](https://github.com/auremoser)
+[Study Group Website](http://mozillascience.github.io/studyGroup/) | main repository for Study Groups, Leads fork this repository to start their own study group and customize their website | [code](https://github.com/mozillascience/studyGroup) | [Aurelia](https://github.com/auremoser)
+[Study Group Orientation Guide](https://mozillascience.github.io/study-group-orientation/index.html) | gitbook that explains how to start a study group and start planning events/workshops | [code](https://github.com/mozillascience/study-group-orientation) | [Zannah](https://github.com/zee-moz) 
+[Study Group Lessons](https://github.com/mozillascience/studyGroupLessons) | submoduled lesson outlines for a variety of programming and open science topics | check out the [issues](https://github.com/mozillascience/studyGroupLessons/issues) for additional lesson suggestions or implementations of the "standard" repo lessons | [Aurelia](https://github.com/auremoser)
 [Study Group Events Tracker](https://mzl.la/sg-events) | website for submitting events with more detailed metadata on attendees and topics | [Code](https://github.com/mozillascience/studyGroupEvents) | [Aurelia](https://github.com/auremoser)
 [Study Group Events Crawler](https://github.com/auremoser/sg-events) | set of scripts for pulling events from the forked Study Group repositories and creation JSON for visualizations | | [Aurelia](https://github.com/auremoser)
 [Mozilla Study Group Project](https://science.mozilla.org/programs/studygroups) | part of the Mozilla Science Lab website, where the study group project and map of Study Group locations is featured | | Mozilla Science Lab
@@ -28,8 +28,8 @@ Resource | Description | Additional Links | Owner
 ## Problem Statement
 Right now there's no easy way to see all the study group events, or to otherwise visualize Study Group project participation. We'd like to change that :smiley:.
 
-* Check the [CONTRIBUTOR.md]() file to learn more about our objectives
-* Read through our [ROADMAP.md]() for the broader goals for this project
+* Check the [CONTRIBUTOR.md](https://github.com/mozillascience/studyGroup-GSOC/blob/master/CONTRIBUTOR.md) file to learn more about our objectives
+* Read through our [ROADMAP.md](https://github.com/mozillascience/studyGroup-GSOC/blob/master/ROADMAP.md) for the broader goals for this project
 * Review the [issues queue](https://github.com/mozillascience/studyGroup-GSOC/issues) for some specific ways to dive into development, or contribute your own
 
 ## Expected Outcomes
@@ -54,7 +54,8 @@ Aurelia Moser, Community Lead, Mozilla Science Lab, [@auremoser](https://twitter
 * **Study Group** - Mozilla Study Groups are fun, informal meetups of your friends and colleagues from around your local institution or town to share skills, stories and ideas on using code for research, and explore open research practices. The goal is to create a friendly, no-pressure environment where people can share their work, ask for help on a coding problem, and learn and work together with their peers. Anyone can start a Study Group.
 * **Study Group Lead** - someone who forks the Study Group website repo, and begins leading a study group in his/her local community, with collaborators or without.
 * **"Events"** - study group leads organize "events" or informal in-person meetings via the `_posts` directory (like [this one](https://github.com/aure-test/studyGroup/blob/gh-pages/_posts/2017-01-20-rnoobs.markdown)) and the issues like ([this one](https://github.com/aure-test/studyGroup/issues/1)) in their forked [Study Group websites](https://github.com/mozillascience/studyGroup). There is a guide for this in the Study Group [README - how to setup your site](https://github.com/mozillascience/studyGroup#how-to-set-up-your-own-mozilla-study-group-website).
-* **Fork** - to create a copy of a repository on your own github, this is how Study Groups propogate: Study Group Leads create a Github account and select the "fork" button on the [Study Group Website](http://mozillascience.github.io/studyGroup/) homepage to create their own study group and begin customizing their website, planning events and activities for their community
+* **Fork** - to create a copy of a repository on your own github, this is how Study Groups propogate: Study Group Leads create a Github account and select the "fork" button on the [Study Group Website](http://mozillascience.github.io/studyGroup/) homepage to create their own study group and begin customizing their website, planning events and activities for their community.
+* **Submodule** - on Github, a repository embedded in your main repository, you can read more about this process and why you might want to do it [here](https://gist.github.com/gitaarik/8735255), it's how the Study Group Lessons are logged in our Lessons repo.
 
 
 
