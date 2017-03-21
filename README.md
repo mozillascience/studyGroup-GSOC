@@ -17,19 +17,19 @@ Currently, we have several repositories for Study Group Resources, which we welc
 
 Resource | Description | Additional Links | Owner
 -------- | ----------- | ---------------- | -----
-[Study Group Website](http://mozillascience.github.io/studyGroup/) | main repository for Study Groups, Leads fork this repository to start their own study group and customize their website | [code](https://github.com/mozillascience/studyGroup) | [Aurelia](https://github.com/auremoser)
-[Study Group Orientation Guide](https://mozillascience.github.io/study-group-orientation/index.html) | gitbook that explains how to start a study group and start planning events/workshops | [code](https://github.com/mozillascience/study-group-orientation) | [Zannah](https://github.com/zee-moz) 
+[Study Group Website](http://mozillascience.github.io/studyGroup/) | main repository for Study Groups, Leads fork this repository to start their own study group and customize their website | [code](https://github.com/mozillascience/studyGroup) + [issues](https://github.com/mozillascience/studyGroup/issues)| [Aurelia](https://github.com/auremoser)
+[Study Group Orientation Guide](https://mozillascience.github.io/study-group-orientation/index.html) | gitbook that explains how to start a study group and start planning events/workshops | [code](https://github.com/mozillascience/study-group-orientation) + [issues](https://github.com/mozillascience/study-group-orientation/issues) | [Zannah](https://github.com/zee-moz) 
 [Study Group Lessons](https://github.com/mozillascience/studyGroupLessons) | submoduled lesson outlines for a variety of programming and open science topics | check out the [issues](https://github.com/mozillascience/studyGroupLessons/issues) for additional lesson suggestions or implementations of the "standard" repo lessons | [Aurelia](https://github.com/auremoser)
-[Study Group Events Tracker](https://mzl.la/sg-events) | website for submitting events with more detailed metadata on attendees and topics | [Code](https://github.com/mozillascience/studyGroupEvents) | [Aurelia](https://github.com/auremoser)
-[Study Group Events Crawler](https://github.com/auremoser/sg-events) | set of scripts for pulling events from the forked Study Group repositories and creation JSON for visualizations | | [Aurelia](https://github.com/auremoser)
+[Study Group Events Tracker](https://mzl.la/sg-events) | website for submitting events with more detailed metadata on attendees and topics | [code](https://github.com/mozillascience/studyGroupEvents) + [issues](https://github.com/mozillascience/studyGroupEvents/issues) | [Aurelia](https://github.com/auremoser)
+[Study Group Events Crawler](https://github.com/auremoser/sg-events) | set of scripts for pulling events from the forked Study Group repositories and creation JSON for visualizations | [code](https://github.com/auremoser/sg-events/) + [issues](https://github.com/auremoser/sg-events/issues) | [Aurelia](https://github.com/auremoser)
 [Mozilla Study Group Project](https://science.mozilla.org/programs/studygroups) | part of the Mozilla Science Lab website, where the study group project and map of Study Group locations is featured | | Mozilla Science Lab
 [Gitter Chat](https://gitter.im/mozillascience/studyGroup) | community chat room for all study group related issues and activity around the world | | Mozilla Science Lab
 
 ## Problem Statement
 Right now there's no easy way to see all the study group events, or to otherwise visualize Study Group project participation. We'd like to change that :smiley:.
 
-* Check the [CONTRIBUTOR.md](https://github.com/mozillascience/studyGroup-GSOC/blob/master/CONTRIBUTOR.md) file to learn more about our objectives
-* Read through our [ROADMAP.md](https://github.com/mozillascience/studyGroup-GSOC/blob/master/ROADMAP.md) for the broader goals for this project
+* Check the [CONTRIBUTOR.md](CONTRIBUTOR.md) file to learn more about our objectives
+* Read through our [ROADMAP.md](ROADMAP.md) for the broader goals for this project
 * Review the [issues queue](https://github.com/mozillascience/studyGroup-GSOC/issues) for some specific ways to dive into development, or contribute your own
 
 ## Expected Outcomes
@@ -44,6 +44,18 @@ Ideally, we'd like to have the following outcomes, subject to applicant interest
 The Study Group project is primarily composed of Github infrastructure, Javascript, and occasionally Python. Contributors with Node and Javascript visualization skills are encouraged to apply!
 
 All are welcome to contribute as the methods of contribution vary, review some of the [issues](https://github.com/mozillascience/studyGroup-GSOC/issues) and decide how to best apply your skills.
+
+## Getting Started
+
+Ready to start contributing to this GSOC project? AWESOME, thanks for reading this far. 
+
+* Take a look at the existing Study Groups and map visualization on the [Mozilla Study Group Project Page](https://science.mozilla.org/programs/studygroups)
+* Review the various repositories in the table above, under `Project Description`
+* Consider the `Problem Statement` and `Outcomes` in this README
+* Draft a proposal for your approach to solving some of these issues and achieving these outcomes
+* Send your proposal to aurelia[at]mozillafoundation[dot]org
+* You can expect followup on your proposal if chosen by the end of the GSOC proposal period, hopefully before!
+
 
 ## Mentors
 
