@@ -1,5 +1,7 @@
 # Study Group - GSoC
 
+[![Join the chat at https://gitter.im/studyGroup-GSOC/Lobby](https://badges.gitter.im/studyGroup-GSOC/Lobby.svg)](https://gitter.im/studyGroup-GSOC/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Welcome to the planning repository for the 2017 Study Group Google Summer of Code (GSOC) project!
 
 If you're interested in contributing, you should find all of the details here. We've centralized it into this repository, because the Study Groups project is distributed accross multiple repositories, and we'd like to keep things tidy and focused for the duration of the mentorship. Issues and roadmap goals will reflect changes accross multiple repositories on Github, so you'll have the opportunity to contribute to multiple aspects of this project.
