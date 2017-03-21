@@ -23,7 +23,7 @@ Resource | Description | Additional Links | Owner
 [Study Group Events Tracker](https://mzl.la/sg-events) | website for submitting events with more detailed metadata on attendees and topics | [code](https://github.com/mozillascience/studyGroupEvents) + [issues](https://github.com/mozillascience/studyGroupEvents/issues) | [Aurelia](https://github.com/auremoser)
 [Study Group Events Crawler](https://github.com/auremoser/sg-events) | set of scripts for pulling events from the forked Study Group repositories and creation JSON for visualizations | [code](https://github.com/auremoser/sg-events/) + [issues](https://github.com/auremoser/sg-events/issues) | [Aurelia](https://github.com/auremoser)
 [Mozilla Study Group Project](https://science.mozilla.org/programs/studygroups) | part of the Mozilla Science Lab website, where the study group project and map of Study Group locations is featured | | Mozilla Science Lab
-[Gitter Chat](https://gitter.im/mozillascience/studyGroup) | community chat room for all study group related issues and activity around the world | | Mozilla Science Lab
+[Gitter Chat](https://gitter.im/mozillascience/studyGroup) | community chat room for all study group related issues and activity around the world | Questions specifically about GSOC? Ask them in the [gitter chat for gsoc](https://gitter.im/studyGroup-GSOC/Lobby)| Mozilla Science Lab
 
 ## Problem Statement
 Right now there's no easy way to see all the study group events, or to otherwise visualize Study Group project participation. We'd like to change that :smiley:.
