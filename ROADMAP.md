@@ -11,20 +11,20 @@ Want to jump in?
 - [Writing code](https://github.com/mozillascience/studyGroup-GSOC/labels/development): Ready to write some JavaScript with us? These issues are waiting for you!
 - [Discuss](https://github.com/mozillascience/studyGroup-GSOC/labels/question): There are still some open ended questions for these visualization prototypes. Join in on the discussion.
 ## Short term - what we're working on now :tada:
-- **Testing + QA'ing + Improving our Materials**
+- **Testing + QA'ing + Improving our Materials** (#4)
   - Ways to improve our existing Study Group Resources would be greatly appreciated, and often come from people who have walked through the process of [creating a study group](https://github.com/mozillascience/studyGroup#for-new-organizers), and following our [orientation guide](https://mozillascience.github.io/study-group-orientation/). Submitting issues related to the user experience, typos, or missing aspects of our documentation are most welcome! Check the issues for each resource mentioned in our resource table in this [README](https://github.com/mozillascience/studyGroup-GSOC#project-description).
-- **Preparing data**
+- **Preparing data** (#5)
   - Any ideas or scripts on how to get valid JSON or GeoJSON about Study Group activity or event stats would be great, it's often the easiest format to work with for visualizations in Javascript. Check what we mean by JSON in our [Study Group Events Crawler](https://github.com/auremoser/sg-events).
   - Potential 'Google Summer of Code' Project
-- **Designing Visualizations**
+- **Designing Visualizations** (#3 #2 #6)
   - Creating visualizations of data about our Study Groups, prefereably interactives that we could update, automate and embed on our [Study Group Project Page](https://science.mozilla.org/programs/studygroups) are welcome.
   - Potential 'Google Summer of Code' Project
 ## Medium term - what we're working on next! :cake:
-- **Localisation**
+- **Localisation** (#8)
   - Right now, the [Study Group Repo](https://github.com/mozillascience/studyGroup) documentation is in English, with some (awesome but sporadic) translations in [Indonesian](https://github.com/mozillascience/studyGroup/blob/gh-pages/lesson-template-id.md), [Bengali](https://github.com/mozillascience/studyGroup/blob/gh-pages/bn.yml) and [Portugeuse](https://github.com/mozillascience/studyGroup/blob/gh-pages/README-pt.md) submitted by our community members, we'd love to solicit more languages or improvements on these translations if noted/necessary.
   - Potential 'Google Summer of Code' Project
 ## Longer term items  - working on this soon! :fast_forward:
-- **Define a Reporting Process (#160)**
+- **Define a Reporting Process** (#7)
   - Right now, stats about Study Groups globally are scattered between multiple repositories (the [Study Group Website](http://mozillascience.github.io/studyGroup/), the [Study Group Lessons Repo](https://github.com/mozillascience/studyGroupLessons), the [Orientation Gitbook](https://mozillascience.github.io/study-group-orientation/), just to name a few). A unified set of scripts that pulls contributor data from these repos and compiles it into a dataset or short report would be lovely, and would greatly help us showcase what our Study Groups are doing, and support them locally.
   - Potential 'Google Summer of Code' Project
 
