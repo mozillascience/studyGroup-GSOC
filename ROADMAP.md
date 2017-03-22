@@ -10,6 +10,9 @@ Want to jump in?
 - [Design](https://github.com/mozillascience/studyGroup-GSOC/labels/design): We need some help designing visualizations and deciding how they will display on the Mozilla Study Group Project page, or whether they might warrant a separate website.
 - [Writing code](https://github.com/mozillascience/studyGroup-GSOC/labels/development): Ready to write some JavaScript with us? These issues are waiting for you!
 - [Discuss](https://github.com/mozillascience/studyGroup-GSOC/labels/question): There are still some open ended questions for these visualization prototypes. Join in on the discussion.
+
+![](http://i.imgur.com/4df4zzy.png)
+
 ## Short term - what we're working on now :tada:
 - **Testing + QA'ing + Improving our Materials** (#4)
   - Ways to improve our existing Study Group Resources would be greatly appreciated, and often come from people who have walked through the process of [creating a study group](https://github.com/mozillascience/studyGroup#for-new-organizers), and following our [orientation guide](https://mozillascience.github.io/study-group-orientation/). Submitting issues related to the user experience, typos, or missing aspects of our documentation are most welcome! Check the issues for each resource mentioned in our resource table in this [README](https://github.com/mozillascience/studyGroup-GSOC#project-description).
