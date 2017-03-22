@@ -14,7 +14,7 @@ Refer to the [README](README.md).
 ## Code Style
 
 ### Code Editor
-If working in Javascript, please use an editor with support for [ESLint](http://eslint.org/) and [EditorConfig](http://editorconfig.org/). 
+If working in Javascript, please use an editor with support for [ESLint](http://eslint.org/) and [EditorConfig](http://editorconfig.org/). If working in HTML, consider checking your code with the [Nu Validator](https://validator.w3.org/nu/).
 
 ### JavaScript
 
