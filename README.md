@@ -17,6 +17,8 @@ For more background, the [Mozilla Science Lab](https://science.mozilla.org/) is 
 
 Currently, we have several repositories for Study Group Resources, which we welcome you to review, see the table below. Assess the usability and user experience of each, and let us know what you think in the [issues here](https://github.com/mozillascience/studyGroup-GSOC/issues).
 
+## Project Resources
+
 Resource | Description | Additional Links | Owner
 -------- | ----------- | ---------------- | -----
 [Study Group Website](http://mozillascience.github.io/studyGroup/) | main repository for Study Groups, Leads fork this repository to start their own study group and customize their website | [code](https://github.com/mozillascience/studyGroup) + [issues](https://github.com/mozillascience/studyGroup/issues)| [Aurelia](https://github.com/auremoser)
