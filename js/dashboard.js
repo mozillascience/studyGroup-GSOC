@@ -1,15 +1,77 @@
+var chart;
+var my_JSON_object_1;
+var my_JSON_object_4;
+
 $(document).ready(function () {
 	init_1();
 	init_2();
 	init_3();
+	init_4();
+	var total= Object.keys(my_JSON_object_1).length;
+	fork_id.innerText = total;
+
+	var total_event = 0;
+	my_JSON_object_1.find(function(item, i){
+                total_event += item.Event;
+        });
+	event_id.innerText = total_event;
+
+	var total_country = Object.keys(my_JSON_object_4).length;
+	country_id.innerText = total_country;
+	
+});
+
+function show(name){
+//	alert(name);
+	var index;
+	var filter_obj = my_JSON_object_1.find(function(item, i){
+  		if(item.Name === name){
+    			index = i;
+  		}
+	});
+	var total= Object.keys(my_JSON_object_1).length;
+	total--;	
+//	alert(total);
+
+//	alert(index);
+
+	if (index > -1) {	
+		var newData;
+
+		newData = my_JSON_object_1.concat();
+			
+		if (index == 0){
+        		newData.splice(index+1,total) 
+     		 }
+      		else if (index == total){
+        		newData.splice(0, index)
+      		}
+      		else {
+        		newData.splice(index+1,total-index+1)
+        		newData.splice(0, index)
+      		}
+
+		chart.load({
+			json: newData,
+                	keys: {
+           	        	x: 'Name',
+                        	value: ["Event"]
+                	},			
+			unload: true
+		});
+	}
+	else {
+		alert("Study Group not found");
+	}
+}
 });
 
 function init_1(){
 	var request_1 = new XMLHttpRequest();
 	request_1.open("GET", "/home/ubuntu/studyGroup-GSOC/data/single_event.json", false);
 	request_1.send(null);
-	var my_JSON_object_1 = JSON.parse(request_1.responseText);
-	var chart= c3.generate({
+	my_JSON_object_1 = JSON.parse(request_1.responseText);
+	chart= c3.generate({
 		bindto: '#chart_1',
 		data: {
 			json: my_JSON_object_1,
@@ -121,3 +183,54 @@ function init_3(){
         	}
 	});
 }
+
+function init_4(){
+        var request_4 = new XMLHttpRequest();
+        request_4.open("GET", "/home/ubuntu/studyGroup-GSOC/data/countries.json", false);
+        request_4.send(null); 
+        my_JSON_object_4 = JSON.parse(request_4.responseText);
+        var chart= c3.generate({
+                bindto: '#chart_4',
+                data: { 
+                        json: my_JSON_object_4,
+                        keys: {
+                                x: 'Country',
+                                value: ["Count"]
+                        },
+			color: function(d){
+				return '#800000';
+			},      
+                        type: 'spline'
+                },
+                axis: {
+                        x: {
+                                type: 'categories',
+                                label: {
+                                        text: 'Countries',
+                                        position: 'outer-center'
+                                },      
+                                extent: [0, 6]
+                        },
+                        y: {
+                                label: {
+                                        text: 'Number of Study Group',
+                                        position: 'outer-middle'
+                                }       
+                        }
+                },
+		subchart: {
+        	            show: true,
+                	    size: {
+                                   height: 80,
+                            }
+                },
+                zoom: {
+                        enabled: true,
+                        rescale: true
+                },      
+                legend: {
+                         show:false
+                }        
+        });
+}
+
