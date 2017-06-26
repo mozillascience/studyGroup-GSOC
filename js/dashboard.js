@@ -64,6 +64,7 @@ function show(name){
 		alert("Study Group not found");
 	}
 }
+});
 
 function init_1(){
 	var request_1 = new XMLHttpRequest();
@@ -103,7 +104,7 @@ function init_1(){
 		legend: {
                          show:false
                 }
-	});	
+	});
 }
 
 function init_2(){			
@@ -232,6 +233,4 @@ function init_4(){
                 }        
         });
 }
-
-
 
