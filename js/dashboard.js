@@ -7,6 +7,7 @@ $(document).ready(function () {
 	init_2();
 	init_3();
 	init_4();
+
 	var total= Object.keys(my_JSON_object_1).length;
 	fork_id.innerText = total;
 
@@ -20,6 +21,67 @@ $(document).ready(function () {
 	country_id.innerText = total_country;
 	
 });
+
+function JSONtoCSV(JSONData, Report_title, show_label){
+        var data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData
+//        alert(data);
+        var CSV = '';
+        CSV += Report_title + '\r\n';
+
+        if (show_label){
+                var row = "";
+                for (var index in data[0]){
+                        row+=index+ ',';
+                }
+                row = row.slice(0, -1);
+
+                CSV += row + '\r\n';
+        }
+        for(var i =0; i<data.length; i++){
+                var row = "";
+                for(var index in data[i]){
+                        row += '"' + data[i][index] + '",';
+                }
+                row.slice(0, row.length-1);
+                CSV+=row + '\r\n';
+        }
+
+        if (CSV == ''){
+                alert("Invalid data");
+                return;
+        }
+        var filename = "Report_";
+        filename += Report_title.replace(/ /g,"_");
+        var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+
+        var link = document.createElement("a");
+        link.href = uri;
+
+        link.style = "visibility:hidden";
+        link.download = filename + ".csv";
+
+        document.body.appendChild(link);
+	link.click();
+        document.body.removeChild(link);
+}
+
+
+function export_csv_1(){
+	var req_1 = new XMLHttpRequest();
+	req_1.open("GET", "/home/ubuntu/studyGroup-GSOC/data/single_event.json", false);
+	req_1.send(null);
+	var json_obj = JSON.parse(req_1.responseText);
+//	alert(json_obj);
+	JSONtoCSV(json_obj, "study_group_events", true);
+}
+
+function export_csv_2(){
+	var req_2 = new XMLHttpRequest();
+        req_2.open("GET", "/home/ubuntu/studyGroup-GSOC/data/countries.json", false);
+        req_2.send(null);
+        var json_obj_2 = JSON.parse(req_2.responseText);
+	JSONtoCSV(json_obj_2, "study_group_countries", true);
+}
 
 function show(name){
 //	alert(name);
