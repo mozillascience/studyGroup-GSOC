@@ -1,0 +1,253 @@
+﻿			Study Group Event Dashboard Data
+
+In this document, you will know data extraction of the Study Group that are used in our Dashboard :)
+
+First we run a script sg-event which stores event details of individual study group in a json file.
+To run this script:
+1. npm install
+2. npm i node-github
+3. NODE_GITHUB_TOKEN=<token> node index.js 
+where token = personal access github token
+
+1)  To extract number of events of the individual study group, we run a java code that fetches the required data from sg-event and store it in json file
+code:
+
+//package com.crunchify.tutorials;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+/* 
+ * @author Crunchify.com
+ */
+ 
+public class CrunchifyJSONFileWrite {
+ 
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) throws 
+            IOException, ParseException {
+		 		
+		JSONArray overall = new JSONArray();
+		JSONArray single_event = new JSONArray();
+		
+		JSONObject obj = new JSONObject();
+
+		File folder = new File("/home/ubuntu/sg-events/data");
+		File[] listOfFiles = folder.listFiles();
+		
+		for (int i=0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isDirectory()) {
+				System.out.println("Directory: " + listOfFiles[i].getName());
+			JSONObject name_count = new JSONObject();
+                        JSONParser parser = new JSONParser();
+			File f = new File("/home/ubuntu/sg-events/data/" + listOfFiles[i].getName() + "/data.json");
+			if (f.exists()) {
+
+//The path of the sg-event data fetched through script
+
+	                	JSONArray a = (JSONArray) parser.parse(new FileReader(
+        	        	"/home/ubuntu/sg-events/data/" + listOfFiles[i].getName() + "/data.json"));
+				int count = 0;
+        	        	for (Object o : a)
+                		{
+                        		JSONObject person = (JSONObject) o;
+                        		count++;
+                		}
+                		System.out.println("The count is " + count);
+				name_count.put("Event", count);	
+				name_count.put("Name", listOfFiles[i].getName());
+				single_event.add(name_count);
+			}
+			else {
+				name_count.put("Event", 0);
+                                name_count.put("Name", listOfFiles[i].getName());
+                                single_event.add(name_count);
+			}
+
+			}
+		}
+		try (FileWriter file = new FileWriter("/home/ubuntu/Documents/single_event.json")) {
+			file.write(single_event.toJSONString());
+		} 
+				 
+	}
+}
+
+
+2) To extract number of lessons and types of lessons conducted in our Study Group, we run a java code that fetches the issues' label and stores the data in json file.
+Reference : https://github.com/mozillascience/studyGroupLessons/issues
+
+code:
+//package com.crunchify.tutorials;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.File;
+import java.io.*;
+import java.io.FileWriter;
+import java.lang.*;
+import java.util.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+/* 
+ * @author Crunchify.com
+ */
+ 
+public class Lessons_graph {
+ 
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) throws 
+            IOException, ParseException {
+		try {
+// We extract the issues' labels and store it in a file “count”
+
+ 		Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", "curl https://api.github.com/repos/mozillascience/studyGroupLessons/issues | grep 'labels/' > count"});
+            	} catch(Exception e) {
+                	System.out.println(e.toString());
+                	e.printStackTrace();
+           	 }
+		try {
+			File f = new File("/home/ubuntu/Documents/count");
+			Scanner sc = new Scanner(f);
+			Map<String, Integer> lookup = new HashMap<String, Integer>();	
+			JSONArray levels = new JSONArray();
+			JSONArray types = new JSONArray();
+			while(sc.hasNextLine()){
+				String line = sc.nextLine();
+				String[] details = line.split("/");
+				String label = details[7];
+				label = label.replaceAll("\"","");
+				label = label.replaceAll(",","");
+				label = label.replaceAll("%20"," ");
+				if(lookup.get(label) == null ){
+					lookup.put(label, 1);
+				}
+				else{
+					int value = lookup.get(label);
+					value++;
+					lookup.put(label, value);
+				}
+			}
+		for(Map.Entry<String, Integer> entry : lookup.entrySet()){
+			JSONObject obj_level = new JSONObject();
+			JSONObject obj_type = new JSONObject();
+			System.out.println(entry.getKey()+" :: "+entry.getValue());
+			String key = entry.getKey();
+
+//We separate types of lessons and levels of lessons with the help of labels
+
+			if(key.equals("beginner") || key.equals("intermediate") || key.equals("advanced")){
+				obj_level.put("Level", entry.getKey());
+				obj_level.put("Count", entry.getValue());
+				levels.add(obj_level);
+			}
+			else{
+				obj_type.put("Type", entry.getKey());
+				obj_type.put("Count", entry.getValue());
+				types.add(obj_type);
+			}
+		}
+		try(FileWriter file_level = new FileWriter("/home/ubuntu/Documents/levels.json")){
+			file_level.write(levels.toJSONString());
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		try(FileWriter file_type = new FileWriter("/home/ubuntu/Documents/types.json")){
+                        file_type.write(types.toJSONString());
+                        
+                }catch (Exception e){
+                        e.printStackTrace();
+                }
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}	 			
+	}
+}
+
+
+3) To extract number of Study Group in various countries, we run a java code that fetches the geojson data and stores it in json file. This took a while due to many json objects and array.
+
+Code: 
+//package com.crunchify.tutorials;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import org.json.simple.*;
+import org.json.simple.parser.*;
+
+/* 
+ * @author Crunchify.com
+ */
+ 
+public class location {
+ 
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) throws 
+            IOException, ParseException {
+		 		
+		JSONParser parser = new JSONParser();
+		File f = new File("/home/ubuntu/studyGroup-GSOC/data/whereweare.geojson");
+		if (f.exists()) {
+			JSONArray loc_json = new JSONArray();
+			Map<String, Integer> lookup = new HashMap<String, Integer>();
+			JSONObject a = (JSONObject) parser.parse(new FileReader("/home/ubuntu/studyGroup-GSOC/data/whereweare.geojson"));
+			//String str= (String) a.get("type");
+			JSONArray features = (JSONArray) a.get("features");
+			for(int i=0; i<features.size(); i++){
+				JSONObject features_obj = (JSONObject) features.get(i);
+			//	String features_str = (String) features_obj.get("type");
+				JSONObject features_prop = (JSONObject) features_obj.get("properties");
+				String str_loc = (String) features_prop.get("location");
+		//		System.out.println(str_loc);
+
+// We are fetching the country name from the “location object”
+
+				List<String> list_loc = Arrays.asList(str_loc.split(","));
+				int n = list_loc.size();
+				String loc = list_loc.get(n-1);
+				if(lookup.get(loc) == null){
+					lookup.put(loc, 1);
+				}		
+				else{
+					int value = lookup.get(loc);
+					value++;
+					lookup.put(loc, value);
+				}		
+				System.out.println(loc);
+			}
+			for(Map.Entry<String, Integer> entry : lookup.entrySet()){
+				JSONObject loc_obj = new JSONObject();
+				loc_obj.put("Country", entry.getKey());
+				loc_obj.put("Count", entry.getValue());
+				loc_json.add(loc_obj);
+			}
+			try(FileWriter file = new FileWriter("/home/ubuntu/Documents/countries.json")){
+				file.write(loc_json.toJSONString());			
+	
+			}catch (Exception e){
+				e.printStackTrace();
+			}	
+		}			 
+	}	
+}
+
+From these data, we fetched number of total events, total forks and total countries. 
+You can refer the dashboard code as to how the data are fetched and used for visualization.
