@@ -1,12 +1,14 @@
 var chart;
 var my_JSON_object_1;
 var my_JSON_object_4;
+var my_JSON_object_5;
 
 $(document).ready(function () {
 	init_1();
 	init_2();
 	init_3();
 	init_4();
+	init_5();
 
 	var total= Object.keys(my_JSON_object_1).length;
 	fork_id.innerText = total;
@@ -19,8 +21,64 @@ $(document).ready(function () {
 
 	var total_country = Object.keys(my_JSON_object_4).length;
 	country_id.innerText = total_country;
+
+	var total_members=0;
+	my_JSON_object_5.find(function(item, i){
+		total_members += item.Members;
+	});
+	members_id.innerText = total_members;
 	
 });
+
+function init_5(){
+	var request_5 = new XMLHttpRequest();
+        request_5.open("GET", "/home/ubuntu/studyGroup-GSOC/data/sg_members.json", false);
+        request_5.send(null);
+        my_JSON_object_5 = JSON.parse(request_5.responseText);
+	var chart_5 = c3.generate({
+                bindto: '#chart_5',
+                data: {
+                        json: my_JSON_object_5,
+                        keys: {
+                                x: 'Name',
+                                value: ["Members"]
+                        },
+			 color: function(d){
+                                return '#006400';
+                        },
+                        type: 'area'
+                },
+                axis: {
+                        x: {
+                                type: 'categories',
+                                label: {
+                                        text: 'Study Group Lead',
+                                        position: 'outer-center'
+                                },
+                                extent: [0, 9]
+                        },
+                        y: {
+                                label: {
+                                        text: 'Number of Members',
+                                        position: 'outer-middle'
+                                }
+                        }
+                },
+		subchart: {
+                            show: true,
+                            size: {
+                                   height: 80,
+                            }
+                },
+                zoom: {
+                        enabled: true,
+                        rescale: true
+                },
+                legend: {
+                         show:false
+                }
+        });
+}
 
 function JSONtoCSV(JSONData, Report_title, show_label){
         var data = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData
@@ -84,7 +142,7 @@ function export_csv_2(){
 }
 
 function show(name){
-//	alert(name);
+	alert(name);
 	var index;
 	var filter_obj = my_JSON_object_1.find(function(item, i){
   		if(item.Name === name){
@@ -182,6 +240,9 @@ function init_2(){
 					x: 'Type',
 					value: ["Count"]
 				},
+				color: function(d){
+					return '#FF8C00';
+				},
 				type: 'line'
 			},
 			axis: {
@@ -227,7 +288,7 @@ function init_3(){
 		sites.push(e.Level);
 		data[e.Level] = e.Count;
 	});	
-	chart = c3.generate({
+	var chart = c3.generate({
 		bindto: '#chart_3',
 		data: {
 			json: [ data ],
