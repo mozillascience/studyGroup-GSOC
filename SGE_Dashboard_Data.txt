@@ -251,3 +251,216 @@ public class location {
 
 From these data, we fetched number of total events, total forks and total countries. 
 You can refer the dashboard code as to how the data are fetched and used for visualization.
+
+
+4) To extract number of members in a study group.
+
+Reference: https://github.com/auremoser/sg-events/blob/master/index.js
+
+script code:
+
+'use strict';
+var GitHubApi = require('node-github');
+var Octokat = require('octokat');
+var matter = require('gray-matter');
+var mkdirp = require('mkdirp');
+var Bluebird = require('bluebird');
+
+//We authenticate to prevent API rate limits
+var octo = new Octokat({
+    token: process.env.NODE_GITHUB_TOKEN
+});
+
+/*
+ * Im mixing both github libraries
+ * because node-github does not implement
+ * getContent, and I already had the fork
+ * part working, I did not see how to do it
+ * using Octokat...
+ * I will probably refactor later.
+ */
+var github = new GitHubApi({
+    version: '3.0.0',
+    debug: true,
+    protocol: 'https',
+    host: 'api.github.com',
+    pathPrefix: '/api/v3',
+    timeout: 5000,
+    headers: {
+        'user-agent': 'My-Cool-GitHub-App'
+    }
+});
+
+github.authenticate({
+    type: 'oauth',
+    token: process.env.NODE_GITHUB_TOKEN
+});
+
+var repository = 'studyGroup';
+var username = 'mozillascience';
+
+var offset = 0;
+var pageSize = 33;
+
+getForkCount(username, repository).then(function(total){
+
+    var promise, promises = [];
+    for(offset=0; offset < Math.ceil(total/pageSize); offset++){
+        promise = processForkBatch(username, repository, offset, pageSize);
+        promises.push(promise);
+    }
+
+    Bluebird.all(promises).then(function(batches){
+        batches.map(function(batch){
+            processContent(batch);
+        });
+    }).catch(function(err){
+        console.error('Batch download error');
+        console.error('ERROR: %s.\n%s', err.message, err.stack);
+    });
+});
+
+function getForkCount(user, repo){
+    return new Bluebird(function(resolve, reject){
+        github.repos.get({
+            user: user,
+            repo: repo,
+        }, function(err, res){
+            console.log('Total forks', res.forks);
+            if(err) return reject(err);
+            resolve(res.forks);
+        });
+    });
+}
+
+function processForkBatch(user, repo, offset, size){
+    if(size > 100) size = 100;
+
+    return new Bluebird(function(resolve, reject){
+        //First we need to know how many forks we have,
+        //since we will have to paginage.
+        github.repos.getForks({
+            user: user,
+            repo: repo,
+            page: offset,
+            per_page: size
+        }, function(err, res) {
+            if(err) return reject(err);
+
+            console.log('Batch size', res.length);
+            var forks = [];
+            res.map(function(fork){
+                forks.push({
+                    user: fork.owner.login,
+                    repo: fork.name,
+                    path: '_data',
+                    ref: 'gh-pages',
+                    full_name: fork.full_name
+                });
+            });
+            resolve(forks);
+        });
+    });
+}
+
+function processContent(forks){
+
+    console.log("FORTS", JSON.stringify(forks, null, 4));
+    forks.map(function(fork){
+        var repo = octo.repos(fork.user, fork.repo);
+        var filepath = require('path').resolve('./data_mem/'+ fork.user);
+        mkdirp.sync(filepath);
+        repo.contents('_data/members.yml').read().then(function(contents) {       
+
+            var promises = [];
+	    console.log("hi");
+	    console.log(contents);
+		
+	    var fs = require('fs');
+	    fs.writeFile(filepath + '/data.txt', contents, function(err){
+	    	if(err){
+			console.log("there is an error");
+		}
+	    }); 	
+		
+            });
+        }).catch(function(err){
+            console.error('Fetch repo _data error');
+            console.error('ERROR: %s.\n%s', err.message, err.stack);
+        });
+    //});
+}
+
+
+//This script creates a folder data_mem that contains the member details.
+
+Code to collect number of members and store it to JSON file.
+
+//package com.crunchify.tutorials;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.File;
+import java.io.*;
+import java.io.FileWriter;
+import java.lang.*;
+import java.util.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+/* 
+ * @author Crunchify.com
+ */
+ 
+public class sg_members {
+ 
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) throws 
+            IOException, ParseException {
+		 		
+		JSONArray overall = new JSONArray();
+		JSONArray single_event = new JSONArray();
+		
+		JSONObject obj = new JSONObject();
+
+		File folder = new File("/home/ubuntu/sg-events/data");
+		File[] listOfFiles = folder.listFiles();
+		
+		for (int i=0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isDirectory()) {
+				System.out.println("Directory: " + listOfFiles[i].getName());
+			JSONObject name_count = new JSONObject();
+                        JSONParser parser = new JSONParser();
+			File f = new File("/home/ubuntu/Downloads/sg-events/data_mem/" + listOfFiles[i].getName() + "/data.txt");
+			if (f.exists()) {
+				int count = 0;
+				Scanner sc = new Scanner(f);
+				while(sc.hasNextLine()){
+					String line = sc.nextLine();
+					
+					// In member details, every member has a name. This is used to count number of members
+					if(line.contains("name")){
+						System.out.println("hello" + line);
+						count++;
+					}
+				}
+                		System.out.println("The count is " + count);
+				name_count.put("Members", count);	
+				name_count.put("Name", listOfFiles[i].getName());
+				single_event.add(name_count);
+			}
+
+			}
+		}
+		try (FileWriter file = new FileWriter("/home/ubuntu/Documents/sg_members.json")) {
+			file.write(single_event.toJSONString());
+		} 
+				 
+	}
+}
+
+
+This data used to plot a graph and display Total Members in the dashboard.
